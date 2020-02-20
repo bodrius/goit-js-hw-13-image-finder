@@ -36,14 +36,15 @@ body {
   right: 10px;
   bottom: 10px;
   outline: none;
+
 }
 
 
 button{
   color:red;
-  margin-left: 20px;
+
   padding: 20px 40px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 600;
   font-size: 25px;
 }

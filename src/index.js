@@ -36,6 +36,7 @@ function submitForm(event) {
 let reSearch;
 function onClickBtn() {
   if (reSearch !== choiseInput.value) {
+    clearInput();
     PNotify.closeAll();
     currentPage = 0;
     reSearch = choiseInput.value;
@@ -64,4 +65,8 @@ function backToTop() {
     top: 0,
     behavior: 'smooth',
   });
+}
+
+function clearInput() {
+    ulListImage.innerHTML = '';
 }
