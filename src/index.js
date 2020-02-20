@@ -6,11 +6,16 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basiclightbox.min.css';
 
 const ulListImage = document.querySelector('#image-list');
-const searchInput = document.querySelector('#input');
-let reSearch;
+ulListImage.addEventListener('click', originImageShow);
 const classBtn = document.querySelector('#classBtn');
 classBtn.addEventListener('click', onClickBtn);
-ulListImage.addEventListener('click', originImageShow);
+const searchForm = document.querySelector('#search-form');
+searchForm.addEventListener('submit', submitForm);
+const choiseInput = document.querySelector('#input');
+
+import PNotify from '../node_modules/pnotify/dist/es/PNotify';
+import PNotifyButtons from '../node_modules/pnotify/dist/es/PNotifyButtons.js';
+import '../node_modules/pnotify/dist/PNotifyBrightTheme.css';
 
 function parseData(data) {
   const rezult = imageList(data);
@@ -23,20 +28,26 @@ function parseData(data) {
 }
 
 let currentPage = 0;
+function submitForm(event) {
+  event.preventDefault();
+  onClickBtn();
+}
 
-function onClickBtn(event) {
-  if (reSearch !== searchInput.value) {
+let reSearch;
+function onClickBtn() {
+  if (reSearch !== choiseInput.value) {
+    PNotify.closeAll();
     currentPage = 0;
-    // console.log(`ENTRY`);
+    reSearch = choiseInput.value;
+    console.log(`ENTRY`);
   }
-  pixabayApiData(searchInput.value, ++currentPage, parseData);
-  reSearch = searchInput.value;
-//   console.log(`Page number ---- ${currentPage}`);
+  pixabayApiData(choiseInput.value, ++currentPage, parseData);
+  console.log(`Page number ---- ${currentPage}`);
 }
 
 function originImageShow(event) {
   let clickImage = event.target;
-  // console.dir(clickImage);
+  console.dir(clickImage);
   if (clickImage.tagName === 'IMG') {
     const instance = basicLightbox.create(
       `<img src="${clickImage.dataset.origin}">`,
@@ -44,11 +55,13 @@ function originImageShow(event) {
     instance.show();
   }
 }
-// instance.close();
 
 const btnToTop = document.querySelector('#fix-button');
 btnToTop.addEventListener('click', backToTop);
 
-function backToTop(event) {
-  window.scrollTo(pageXOffset, 0);
+function backToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
 }
