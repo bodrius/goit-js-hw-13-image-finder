@@ -27,11 +27,11 @@ let currentPage = 0;
 function onClickBtn(event) {
   if (reSearch !== searchInput.value) {
     currentPage = 0;
-    console.log(`ENTRY`);
+    // console.log(`ENTRY`);
   }
   pixabayApiData(searchInput.value, ++currentPage, parseData);
   reSearch = searchInput.value;
-  console.log(`Page number ---- ${currentPage}`);
+//   console.log(`Page number ---- ${currentPage}`);
 }
 
 function originImageShow(event) {
